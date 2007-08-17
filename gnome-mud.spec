@@ -104,7 +104,7 @@ rm -rf %buildroot
 %{_datadir}/pixmaps/%name/*.png
 %{_datadir}/omf/gnome-mud/
 %{_datadir}/%name/*.glade
-%{_mandir}/man6/%name.6.bz2
+%{_mandir}/man6/%name.*
 %_menudir/%name
 %_liconsdir/%name.png
 %_miconsdir/%name.png
