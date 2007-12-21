@@ -21,6 +21,7 @@ Source0:	%name-%version.tar.bz2
 Source1:	%name-32.png
 Source2:	%name-16.png
 Source3:	%name.png
+BuildRoot:	%_tmppath/%name-buildroot
 
 Buildrequires:	python pygtk2.0-devel libvte-devel libgnome2-devel
 BuildRequires:  libgnomeui2-devel, perl-XML-Parser
