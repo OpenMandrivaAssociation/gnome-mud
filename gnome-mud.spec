@@ -55,17 +55,6 @@ GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
 %find_lang %name --with-gnome
 
 # menu
-mkdir -p %buildroot/%_menudir
-cat > %buildroot/%_menudir/%name << EOF
-?package(%name): \
-command="%_gamesbindir/%name" \
-needs="x11" \
-icon="%name.png" \
-section="%section" \
-title="%title" \
-longtitle="%Summary" \
-xdg="true"
-EOF
 
 # icon
 mkdir -p %buildroot/{%_liconsdir,%_iconsdir,%_miconsdir}
@@ -105,7 +94,6 @@ rm -rf %buildroot
 %{_datadir}/omf/gnome-mud/
 %{_datadir}/%name/*.glade
 %{_mandir}/man6/%name.*
-%_menudir/%name
 %_liconsdir/%name.png
 %_miconsdir/%name.png
 %_iconsdir/%name.png
