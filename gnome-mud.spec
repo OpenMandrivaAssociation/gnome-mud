@@ -66,15 +66,13 @@ install -m 644 %SOURCE3 %buildroot/%_iconsdir/%name.png
 
 %post
 %update_menus
-GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` gconftool-2 --makefile-install-rule %{_sysconfdir}/gconf/schemas/gnome-mud.schemas > /dev/null
+%post_install_gconf_schemas gnome-mud
 if [ -x %{_bindir}/scrollkeeper-update ]; then %{_bindir}/scrollkeeper-update -q; fi
 touch %{_datadir}/gnome/help/%{name}/C/%{name}.html
 if [ -x %{_bindir}/yelp-pregenerate ]; then %{_bindir}/yelp-pregenerate %{_datadir}/gnome/help/%{name}/*/%name.xml > /dev/null; fi
 
 %preun
-if [ $1 -eq 0 ]; then
-  GCONF_CONFIG_SOURCE=`gconftool-2 --get-default-source` gconftool-2 --makefile-uninstall-rule %{_sysconfdir}/gconf/schemas/gnome-mud.schemas > /dev/null
-fi
+%preun_uninstall_gconf_schemas gnome-mud
 
 %postun
 %{clean_menus}
