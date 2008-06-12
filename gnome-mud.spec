@@ -65,18 +65,22 @@ install -m 644 %SOURCE3 %buildroot/%_iconsdir/%name.png
 
 
 %post
+%if %mdkversion < 200900
 %update_menus
 %post_install_gconf_schemas gnome-mud
 %update_scrollkeeper
+%endif
 touch %{_datadir}/gnome/help/%{name}/C/%{name}.html
 if [ -x %{_bindir}/yelp-pregenerate ]; then %{_bindir}/yelp-pregenerate %{_datadir}/gnome/help/%{name}/*/%name.xml > /dev/null; fi
 
 %preun
 %preun_uninstall_gconf_schemas gnome-mud
 
+%if %mdkversion < 200900
 %postun
 %{clean_menus}
 %clean_scrollkeeper
+%endif
 
 %clean
 rm -rf %buildroot
