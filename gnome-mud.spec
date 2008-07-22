@@ -2,7 +2,7 @@
 
 %define name gnome-mud
 %define version 0.10.7
-%define release %mkrel 3
+%define release %mkrel 5
 
 %define section Amusement/Strategy
 %define title Gnome-mud
