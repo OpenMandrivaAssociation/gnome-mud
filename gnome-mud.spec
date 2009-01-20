@@ -7,6 +7,7 @@ Group:		Games/Strategy
 URL:		http://amcl.sourceforge.net/
 Source0:	http://fr2.rpmfind.net/linux/gnome.org/sources/gnome-mud/0.11/%name-%version.tar.bz2
 Patch0:		gnome-mud-0.11-fix-str.patch
+Patch1:		gnome-mud-0.11-fix-desktop.patch
 BuildRoot:	%_tmppath/%name-buildroot
 Buildrequires:	libvte-devel gstreamer0.10-devel
 BuildRequires:	intltool libgnet2-devel pcre-devel
@@ -29,6 +30,7 @@ GNOME-Mud is a mudclient for the GNOME platform. Features include:
 %prep
 %setup -q
 %patch0 -p0
+%patch1 -p0
 
 %build
 %configure2_5x --disable-schemas-install
