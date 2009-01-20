@@ -1,30 +1,16 @@
-#rpm spec file for gnome-mud
-
-%define name gnome-mud
-%define version 0.10.7
-%define release %mkrel 5
-
-%define section Amusement/Strategy
-%define title Gnome-mud
-
-%define Summary GNOME-Mud is a mudclient for the GNOME platform.
-
-Summary:	%Summary
-Name:		%name
-Version:	%version
-Release:	%release
-License:	GPL
+Summary:	A mudclient for the GNOME platform
+Name:		gnome-mud
+Version:	0.11
+Release:	%mkrel 1
+License:	GPLv2+
 Group:		Games/Strategy
 URL:		http://amcl.sourceforge.net/
-
-Source0:	%name-%version.tar.bz2
-Source1:	%name-32.png
-Source2:	%name-16.png
-Source3:	%name.png
+Source0:	http://fr2.rpmfind.net/linux/gnome.org/sources/gnome-mud/0.11/%name-%version.tar.bz2
+Patch0:		gnome-mud-0.11-fix-str.patch
 BuildRoot:	%_tmppath/%name-buildroot
-
-Buildrequires:	python pygtk2.0-devel libvte-devel libgnome2-devel
-BuildRequires:  libgnomeui2-devel, perl-XML-Parser
+Buildrequires:	libvte-devel gstreamer0.10-devel
+BuildRequires:	intltool libgnet2-devel pcre-devel
+BuildRequires:	libGConf2-devel gnome-doc-utils
 BuildRequires:  libglade2.0-devel
 
 %description
@@ -42,27 +28,17 @@ GNOME-Mud is a mudclient for the GNOME platform. Features include:
 
 %prep
 %setup -q
+%patch0 -p0
 
 %build
-%configure2_5x
-
-%make WARN_CFLAGS=""
+%configure2_5x --disable-schemas-install
+%make
 
 %install
 rm -rf %{buildroot}
-GCONF_DISABLE_MAKEFILE_SCHEMA_INSTALL=1 %makeinstall_std
+%makeinstall_std
 
 %find_lang %name --with-gnome
-
-# menu
-
-# icon
-mkdir -p %buildroot/{%_liconsdir,%_iconsdir,%_miconsdir}
-install -m 644 src/pixmaps/%name.png %buildroot/%_datadir/pixmaps/%name.png
-install -m 644 %SOURCE1 %buildroot/%_miconsdir/%name.png
-install -m 644 %SOURCE2 %buildroot/%_liconsdir/%name.png
-install -m 644 %SOURCE3 %buildroot/%_iconsdir/%name.png
-
 
 %post
 %if %mdkversion < 200900
@@ -70,8 +46,6 @@ install -m 644 %SOURCE3 %buildroot/%_iconsdir/%name.png
 %post_install_gconf_schemas gnome-mud
 %update_scrollkeeper
 %endif
-touch %{_datadir}/gnome/help/%{name}/C/%{name}.html
-if [ -x %{_bindir}/yelp-pregenerate ]; then %{_bindir}/yelp-pregenerate %{_datadir}/gnome/help/%{name}/*/%name.xml > /dev/null; fi
 
 %preun
 %preun_uninstall_gconf_schemas gnome-mud
@@ -91,14 +65,6 @@ rm -rf %buildroot
 %config(noreplace) %{_sysconfdir}/gconf/schemas/gnome-mud.schemas
 %{_gamesbindir}/gnome-mud
 %{_datadir}/applications/gnome-mud.desktop
-%{_datadir}/pixmaps/*.png
-%{_datadir}/pixmaps/%name/*.png
-%{_datadir}/omf/gnome-mud/
-%{_datadir}/%name/*.glade
+%{_iconsdir}/*/*/*/*
+%{_datadir}/%name
 %{_mandir}/man6/%name.*
-%_liconsdir/%name.png
-%_miconsdir/%name.png
-%_iconsdir/%name.png
-
-
-
