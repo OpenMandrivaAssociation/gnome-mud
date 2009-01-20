@@ -1,10 +1,10 @@
 Summary:	A mudclient for the GNOME platform
 Name:		gnome-mud
 Version:	0.11
-Release:	%mkrel 1
+Release:	%mkrel 2
 License:	GPLv2+
 Group:		Games/Strategy
-URL:		http://amcl.sourceforge.net/
+URL:		http://live.gnome.org/GnomeMud
 Source0:	http://fr2.rpmfind.net/linux/gnome.org/sources/gnome-mud/0.11/%name-%version.tar.bz2
 Patch0:		gnome-mud-0.11-fix-str.patch
 Patch1:		gnome-mud-0.11-fix-desktop.patch
