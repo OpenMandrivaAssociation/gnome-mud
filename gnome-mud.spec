@@ -9,7 +9,12 @@ Source0:	http://fr2.rpmfind.net/linux/gnome.org/sources/gnome-mud/0.11/%name-%ve
 Patch0:		gnome-mud-0.11-fix-str.patch
 Patch1:		gnome-mud-0.11-fix-desktop.patch
 BuildRoot:	%_tmppath/%name-buildroot
-Buildrequires:	libvte-devel gstreamer0.10-devel
+Buildrequires:	libvte-devel
+%if %mdkversion < 200810 
+BuildRequires:	libgstreamer0.10-devel
+%else
+BuildRequires:	gstreamer0.10-devel
+%endif
 BuildRequires:	intltool libgnet2-devel pcre-devel
 BuildRequires:	libGConf2-devel gnome-doc-utils
 BuildRequires:  libglade2.0-devel
