@@ -16,6 +16,7 @@ BuildRequires:	gstreamer0.10-devel
 BuildRequires:	intltool libgnet2-devel pcre-devel
 BuildRequires:	libGConf2-devel gnome-doc-utils
 BuildRequires:  libglade2.0-devel
+BuildRequires:	desktop-file-utils
 
 %description
 GNOME-Mud is a mudclient for the GNOME platform. Features include:
@@ -43,6 +44,11 @@ rm -rf %{buildroot}
 
 mv %buildroot%_gamesdatadir/applications %buildroot%_datadir/
 mv %buildroot%_gamesdatadir/icons %buildroot%_datadir/
+
+desktop-file-install --vendor='' \
+	--dir=%buildroot%_datadir/applications \
+	--add-category='GTK;AdventureGame' \
+	%buildroot%_datadir/applications/*.desktop
 
 %find_lang %name --with-gnome
 
