@@ -1,13 +1,11 @@
 Summary:	A mudclient for the GNOME platform
 Name:		gnome-mud
-Version:	0.11
-Release:	%mkrel 2
+Version:	0.11.2
+Release:	%mkrel 1
 License:	GPLv2+
 Group:		Games/Strategy
 URL:		http://live.gnome.org/GnomeMud
 Source0:	http://fr2.rpmfind.net/linux/gnome.org/sources/gnome-mud/0.11/%name-%version.tar.bz2
-Patch0:		gnome-mud-0.11-fix-str.patch
-Patch1:		gnome-mud-0.11-fix-desktop.patch
 BuildRoot:	%_tmppath/%name-buildroot
 Buildrequires:	libvte-devel
 %if %mdkversion < 200810 
@@ -34,16 +32,17 @@ GNOME-Mud is a mudclient for the GNOME platform. Features include:
 
 %prep
 %setup -q
-%patch0 -p0
-%patch1 -p0
 
 %build
-%configure2_5x --disable-schemas-install
+%configure2_5x --disable-schemas-install --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
 %make
 
 %install
 rm -rf %{buildroot}
 %makeinstall_std
+
+mv %buildroot%_gamesdatadir/applications %buildroot%_datadir/
+mv %buildroot%_gamesdatadir/icons %buildroot%_datadir/
 
 %find_lang %name --with-gnome
 
@@ -73,5 +72,5 @@ rm -rf %buildroot
 %{_gamesbindir}/gnome-mud
 %{_datadir}/applications/gnome-mud.desktop
 %{_iconsdir}/*/*/*/*
-%{_datadir}/%name
+%{_gamesdatadir}/%name
 %{_mandir}/man6/%name.*
