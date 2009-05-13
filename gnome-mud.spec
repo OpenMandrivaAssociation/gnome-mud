@@ -3,7 +3,7 @@ Name:		gnome-mud
 Version:	0.11.2
 Release:	%mkrel 1
 License:	GPLv2+
-Group:		Games/Strategy
+Group:		Games/Adventure
 URL:		http://live.gnome.org/GnomeMud
 Source0:	http://fr2.rpmfind.net/linux/gnome.org/sources/gnome-mud/0.11/%name-%version.tar.bz2
 BuildRoot:	%_tmppath/%name-buildroot
