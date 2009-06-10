@@ -1,7 +1,7 @@
 Summary:	A mudclient for the GNOME platform
 Name:		gnome-mud
 Version:	0.11.2
-Release:	%mkrel 3
+Release:	%mkrel 4
 License:	GPLv2+
 Group:		Games/Adventure
 URL:		http://live.gnome.org/GnomeMud
