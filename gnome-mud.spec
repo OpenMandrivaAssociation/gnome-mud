@@ -6,16 +6,11 @@ License:	GPLv2+
 Group:		Games/Adventure
 URL:		http://live.gnome.org/GnomeMud
 Source0:	http://fr2.rpmfind.net/linux/gnome.org/sources/gnome-mud/0.11/%name-%version.tar.bz2
-BuildRoot:	%_tmppath/%name-buildroot
-Buildrequires:	libvte-devel
-%if %mdkversion < 200810 
-BuildRequires:	libgstreamer0.10-devel
-%else
-BuildRequires:	gstreamer0.10-devel
-%endif
-BuildRequires:	intltool libgnet2-devel pcre-devel
-BuildRequires:	libGConf2-devel gnome-doc-utils
-BuildRequires:  libglade2.0-devel
+Buildrequires:	vte-devel
+BuildRequires:	pkgconfig(gstreamer-0.10)
+BuildRequires:	intltool pkgconfig(gnet-2.0) pkgconfig(libpcre)
+BuildRequires:	pkgconfig(gconf-2.0) pkgconfig(gnome-doc-utils)
+BuildRequires:  pkgconfig(libglade-2.0)
 BuildRequires:	desktop-file-utils
 
 %description
@@ -52,27 +47,11 @@ desktop-file-install --vendor='' \
 
 %find_lang %name --with-gnome
 
-%post
-%if %mdkversion < 200900
-%update_menus
-%post_install_gconf_schemas gnome-mud
-%update_scrollkeeper
-%endif
 
 %preun
 %preun_uninstall_gconf_schemas gnome-mud
 
-%if %mdkversion < 200900
-%postun
-%{clean_menus}
-%clean_scrollkeeper
-%endif
-
-%clean
-rm -rf %buildroot
-
 %files -f %name.lang
-%defattr(-,root,root)
 %doc AUTHORS COPYING README INSTALL ROADMAP
 %config(noreplace) %{_sysconfdir}/gconf/schemas/gnome-mud.schemas
 %{_gamesbindir}/gnome-mud
