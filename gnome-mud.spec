@@ -1,17 +1,23 @@
+%define url_ver %(echo %{version} | cut -d. -f1,2)
+
 Summary:	A mudclient for the GNOME platform
 Name:		gnome-mud
 Version:	0.11.2
-Release:	%mkrel 6
+Release:	7
 License:	GPLv2+
 Group:		Games/Adventure
-URL:		http://live.gnome.org/GnomeMud
-Source0:	http://fr2.rpmfind.net/linux/gnome.org/sources/gnome-mud/0.11/%name-%version.tar.bz2
-Buildrequires:	vte-devel
-BuildRequires:	pkgconfig(gstreamer-0.10)
-BuildRequires:	intltool pkgconfig(gnet-2.0) pkgconfig(libpcre)
-BuildRequires:	pkgconfig(gconf-2.0) pkgconfig(gnome-doc-utils)
-BuildRequires:  pkgconfig(libglade-2.0)
+Url:		http://live.gnome.org/GnomeMud
+Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-mud/%{url_ver}/%{name}-%{version}.tar.bz2
+
 BuildRequires:	desktop-file-utils
+BuildRequires:	intltool
+BuildRequires:	pkgconfig(gconf-2.0)
+BuildRequires:	pkgconfig(gnet-2.0)
+BuildRequires:	pkgconfig(gstreamer-0.10)
+BuildRequires:	pkgconfig(gnome-doc-utils)
+BuildRequires:  pkgconfig(libglade-2.0)
+BuildRequires:	pkgconfig(libpcre)
+Buildrequires:	pkgconfig(vte)
 
 %description
 GNOME-Mud is a mudclient for the GNOME platform. Features include:
@@ -30,11 +36,13 @@ GNOME-Mud is a mudclient for the GNOME platform. Features include:
 %setup -q
 
 %build
-%configure2_5x --disable-schemas-install --bindir=%{_gamesbindir} --datadir=%{_gamesdatadir}
+%configure2_5x \
+	--disable-schemas-install \
+	--bindir=%{_gamesbindir} \
+	--datadir=%{_gamesdatadir}
 %make
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
 mv %buildroot%_gamesdatadir/applications %buildroot%_datadir/
@@ -45,17 +53,17 @@ desktop-file-install --vendor='' \
 	--add-category='GTK;AdventureGame' \
 	%buildroot%_datadir/applications/*.desktop
 
-%find_lang %name --with-gnome
+%find_lang %{name} --with-gnome
 
 
 %preun
 %preun_uninstall_gconf_schemas gnome-mud
 
-%files -f %name.lang
+%files -f %{name}.lang
 %doc AUTHORS COPYING README INSTALL ROADMAP
 %config(noreplace) %{_sysconfdir}/gconf/schemas/gnome-mud.schemas
 %{_gamesbindir}/gnome-mud
 %{_datadir}/applications/gnome-mud.desktop
 %{_iconsdir}/*/*/*/*
-%{_gamesdatadir}/%name
-%{_mandir}/man6/%name.*
+%{_gamesdatadir}/%{name}
+%{_mandir}/man6/%{name}.*
