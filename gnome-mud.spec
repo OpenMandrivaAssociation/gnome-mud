@@ -6,7 +6,7 @@ Version:	0.11.2
 Release:	8
 License:	GPLv2+
 Group:		Games/Adventure
-Url:		http://live.gnome.org/GnomeMud
+Url:		https://live.gnome.org/GnomeMud
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-mud/%{url_ver}/%{name}-%{version}.tar.bz2
 
 BuildRequires:	desktop-file-utils
