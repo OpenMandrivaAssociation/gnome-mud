@@ -9,6 +9,11 @@ Group:		Games/Adventure
 Url:		https://live.gnome.org/GnomeMud
 Source0:	http://ftp.gnome.org/pub/GNOME/sources/gnome-mud/%{url_ver}/%{name}-%{version}.tar.bz2
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	desktop-file-utils
 BuildRequires:	intltool
 BuildRequires:	pkgconfig(gconf-2.0)
